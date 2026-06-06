@@ -2,21 +2,22 @@ import { useContext } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { FavoritesContext } from "../context/FavoritesContext";
 
-export default function FavoritesScreen() {
+export default function FavouritesScreen() {
   const { favorites } = useContext(FavoritesContext);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Your Favorites</Text>
+      <Text style={styles.title}>My Favorite Quotes</Text>
+
       {favorites.length === 0 ? (
-        <Text style={styles.emptyText}>No favorite quotes saved yet!</Text>
+        <Text style={styles.emptyText}>No favorites added yet.</Text>
       ) : (
         <FlatList
           data={favorites}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <View style={styles.item}>
-              <Text style={{ color: "#fff" }}>{item.text}</Text>
+              <Text style={{ color: "#fff" }}>{item.quote}</Text>
             </View>
           )}
         />
