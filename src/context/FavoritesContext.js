@@ -8,7 +8,7 @@ const STORAGE_KEY = "@quote_app_favorites";
 export const FavoritesProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
 
-  // Load favorites from local storage when the app opens
+  // Load favorites from storage when app starts
   useEffect(() => {
     const loadFavorites = async () => {
       try {
@@ -17,37 +17,50 @@ export const FavoritesProvider = ({ children }) => {
           setFavorites(JSON.parse(storedData));
         }
       } catch (error) {
-        console.error("Failed to load favorites from storage:", error);
+        console.error("Failed to load favorites:", error);
       }
     };
     loadFavorites();
   }, []);
 
-  // Action: Add a quote to favorites
+  // Add quote to favorites (with duplicate check)
   const addFavorite = async (quoteItem) => {
     try {
+      // Prevent duplicate quotes
+      if (favorites.some(item => item.id === quoteItem.id)) {
+        return false; // Already exists
+      }
+
       const updatedFavorites = [...favorites, quoteItem];
       setFavorites(updatedFavorites);
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedFavorites));
+      return true;
     } catch (error) {
       console.error("Failed to save favorite:", error);
+      return false;
     }
   };
 
-  // Action: Remove a quote from favorites
+  // Remove quote from favorites
   const removeFavorite = async (quoteId) => {
     try {
       const updatedFavorites = favorites.filter((item) => item.id !== quoteId);
       setFavorites(updatedFavorites);
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedFavorites));
+      return true;
     } catch (error) {
       console.error("Failed to remove favorite:", error);
+      return false;
     }
   };
 
   return (
     <FavoritesContext.Provider
-      value={{ favorites, addFavorite, removeFavorite }}
+      value={{ 
+        favorites, 
+        addFavorite, 
+        removeFavorite 
+      }}
     >
       {children}
     </FavoritesContext.Provider>
