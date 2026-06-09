@@ -8,7 +8,7 @@ const STORAGE_KEY = "@quote_app_favorites";
 export const FavoritesProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
 
-  // Load favorites from storage when app starts
+  // Load favorite from storage when app starts
   useEffect(() => {
     const loadFavorites = async () => {
       try {
