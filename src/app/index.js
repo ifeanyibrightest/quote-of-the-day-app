@@ -55,7 +55,7 @@ export default function HomeScreen() {
 
 
   const [copiedMessage, setCopiedMessage] = useState(false);
-  const textToCopy = `"${currentQuote.quote}"\n\n— ${currentQuote.author}`;
+  const textToCopy = `"${currentQuote?.quote}"\n\n— ${currentQuote?.author}`;
 
   const handleCopyToClipboard = async () => {
     await Clipboard.setStringAsync(textToCopy); 
