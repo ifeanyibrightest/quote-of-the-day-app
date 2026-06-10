@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, Share, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from '../../Styles/main';
 import { FavoritesContext } from '../context/FavoritesContext';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 
@@ -76,67 +77,72 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <View style={styles.containerforindex}>
-      <Text style={styles.indextitle}>Quote of the Day</Text>
+    <SafeAreaView style={styles.containerforindex}>
+      <View>
+        <Text style={styles.indextitle}>Quote of the Day</Text>
 
-      <View style={styles.indexquoteCard}>
-        {loading ? (
-          <ActivityIndicator size="large" color="#fff" />
-        ) : currentQuote ? (
-          <>
-            <Text style={styles.indexquoteText}>"{currentQuote.quote}"</Text>
-            <Text style={[styles.authorText, {textAlign: 'center',}]}>- {currentQuote.author}</Text>
-          </>
-        ) : (
-          <Text style={styles.quoteText}>No quote available. Tap "New Quote"</Text>
-        )}
+        <View style={styles.indexquoteCard}>
+          {loading ? (
+            <ActivityIndicator size="large" color="#fff" />
+          ) : currentQuote ? (
+            <>
+              <Text style={styles.indexquoteText}>"{currentQuote.quote}"</Text>
+              <Text style={[styles.authorText, {textAlign: 'center',}]}>- {currentQuote.author}</Text>
+            </>
+          ) : (
+            <Text style={styles.quoteText}>No quote available. Tap "New Quote"</Text>
+          )}
 
-        <Ionicons name="clipboard-outline" size={25}
-          style={styles.designforclippy} 
-          onPress={handleCopyToClipboard} 
-        />
+          <Ionicons name="clipboard-outline" size={25}
+            style={styles.designforclippy} 
+            onPress={handleCopyToClipboard} 
+          />
 
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity 
-          style={styles.newQuoteButton} 
-          onPress={fetchNewQuote}
-          disabled={loading}
-        >
-          <Text style={styles.buttonText}>
-            {loading ? "Loading..." : "New Quote"}
-          </Text>
-        </TouchableOpacity>
-
-        <View>
-          <TouchableOpacity 
-            style={[styles.saveButton, isSaved && styles.savedButton]} 
-            onPress={saveToFavorites}
-            disabled={!currentQuote || loading}
-          >
-            <Text style={styles.saveButtonText}>
-              {isSaved ? "Saved ❤️" : "Save to Favorites"}
-            </Text>
-          </TouchableOpacity>
         </View>
 
+        <View style={styles.buttonContainer}>
 
           <View>
             <TouchableOpacity 
-              style={[styles.shareButton]} 
-              onPress={shareQuote}
+              style={styles.newQuoteButton} 
+              onPress={fetchNewQuote}
+              disabled={loading}
             >
-              <Ionicons name="share-social-outline" size={25}/>
               <Text style={styles.buttonText}>
-                Share
+                {loading ? "Loading..." : "New Quote"}
               </Text>
             </TouchableOpacity>
           </View>
-        
+
+          <View>
+            <TouchableOpacity 
+              style={[styles.saveButton, isSaved && styles.savedButton]} 
+              onPress={saveToFavorites}
+              disabled={!currentQuote || loading}
+            >
+              <Text style={styles.saveButtonText}>
+                {isSaved ? "Saved ❤️" : "Save to Favorites"}
+              </Text>
+            </TouchableOpacity>
+          </View>
 
 
+            <View>
+              <TouchableOpacity 
+                style={[styles.shareButton]} 
+                onPress={shareQuote}
+              >
+                <Ionicons name="share-social-outline" size={25}/>
+                <Text style={styles.buttonText}>
+                  Share
+                </Text>
+              </TouchableOpacity>
+            </View>
+          
+
+
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }

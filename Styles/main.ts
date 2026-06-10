@@ -18,7 +18,8 @@ export const styles = StyleSheet.create({
     indextitle: {
         fontSize: 28,
         fontWeight: 'bold', 
-        marginBottom: 30, 
+        marginBottom: 30,
+        textAlign:'center', 
         color: '#fff'
     },
 
@@ -31,7 +32,7 @@ export const styles = StyleSheet.create({
     },
 
     indexquoteCard: {
-        width: 450, 
+        width: 350, 
         padding: 25, 
         backgroundColor: '#1A1A1A', 
         borderRadius: 12,
@@ -78,7 +79,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignSelf:'center',
         flexDirection: 'row',
-        width:450,
+        width:350,
         margin:10,
     },
 
@@ -111,21 +112,21 @@ export const styles = StyleSheet.create({
     
     buttonContainer: { 
         gap: 12,
-        width:450
+        width:350
     },
     
     newQuoteButton: { 
         backgroundColor: '#4CAF50', 
         paddingVertical: 15, 
         borderRadius: 8,
-        width:450,
+        width:350,
     },
 
     saveButton: { 
         backgroundColor: '#FF9800', 
         paddingVertical: 15, 
         borderRadius: 8,
-        width:450,
+        width:350,
     },
 
     savedButton: { 
@@ -153,7 +154,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#4CAF50', 
     paddingVertical: 15, 
     borderRadius: 8, 
-    width:450
+    width:350
   },
 
   designforclippy:{

@@ -1,6 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useContext } from 'react';
 import { FlatList, Share, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from '../../Styles/main';
 import { FavoritesContext } from '../context/FavoritesContext';
 
@@ -44,7 +45,8 @@ export default function FavoritesScreen() {
       
 
   return (
-    <View style={styles.containerinfavorites}>
+    <SafeAreaView style={styles.containerinfavorites}> 
+    <View >
       <Text style={styles.favoritestitle}>My Favorites ({favorites.length})</Text>
       
       {favorites.length === 0 ? (
@@ -61,5 +63,6 @@ export default function FavoritesScreen() {
         />
       )}
     </View>
+    </SafeAreaView>
   );
 }
